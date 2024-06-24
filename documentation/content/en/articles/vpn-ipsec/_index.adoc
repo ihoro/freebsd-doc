@@ -80,9 +80,9 @@ Here is the output from the home gateway:
 [.programlisting]
 ....
 gif0: flags=8051 mtu 1280
-tunnel inet 172.16.5.4 --> 192.168.1.12
-inet6 fe80::2e0:81ff:fe02:5881%gif0 prefixlen 64 scopeid 0x6
-inet 10.246.38.1 --> 10.0.0.5 netmask 0xffffff00
+tunnel inet 192.168.1.12 --> 172.16.5.4
+inet 10.0.0.5 --> 10.246.38.1 netmask 0xffffff00
+inet6 fe80::250:bfff:fe3a:c1f%gif0 prefixlen 64 scopeid 0x4
 ....
 
 Here is the output from the corporate gateway:
@@ -90,9 +90,9 @@ Here is the output from the corporate gateway:
 [.programlisting]
 ....
 gif0: flags=8051 mtu 1280
-tunnel inet 192.168.1.12 --> 172.16.5.4
-inet 10.0.0.5 --> 10.246.38.1 netmask 0xffffff00
-inet6 fe80::250:bfff:fe3a:c1f%gif0 prefixlen 64 scopeid 0x4
+tunnel inet 172.16.5.4 --> 192.168.1.12
+inet6 fe80::2e0:81ff:fe02:5881%gif0 prefixlen 64 scopeid 0x6
+inet 10.246.38.1 --> 10.0.0.5 netmask 0xffffff00
 ....
 
 Once complete, both internal IP addresses should be reachable using man:ping[8]:
@@ -128,9 +128,9 @@ The following commands will achieve this goal:
 [source,shell]
 ....
 corp-gw# route add 10.0.0.0 10.0.0.5 255.255.255.0
-corp-gw# route add net 10.0.0.0: gateway 10.0.0.5
+route add net 10.0.0.0: gateway 10.0.0.5
 home-gw# route add 10.246.38.0 10.246.38.1 255.255.255.0
-home-gw# route add host 10.246.38.0: gateway 10.246.38.1
+route add net 10.246.38.0: gateway 10.246.38.1
 ....
 
 Internal machines should be reachable from each gateway as well as from machines behind the gateways.
