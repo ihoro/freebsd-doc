@@ -73,7 +73,7 @@ if [ $# -ne 0 ] ; then
 		case $(expr "${arg}" : '^[0-9A-Fa-f]\{8,16\}$') in
 		8)
 			warning "${arg}: recommend using 16-digit keyid"
-			;&
+			;;
 		16)
 			keyid=$(getkeybyid "${arg}")
 			if [ -n "${keyid}" ] ; then
