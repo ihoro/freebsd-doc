@@ -119,7 +119,6 @@ if [ $# -ne 0 ] ; then
 		else
 			warning "${arg} not found"
 		fi
-		shift
 	done
 else
 	# Search for keys by freebsd.org email
